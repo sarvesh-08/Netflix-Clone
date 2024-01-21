@@ -1,10 +1,13 @@
-import React from "react";
-function Row ({title}){
-    return(
-        <div>
-            <h2>{title}</h2>
-        </div>
-    )
+import react,{useState,useEffect} from 'react'
+import axios from 'axios'
+
+function Row() {
+
+  return (
+    <div>
+      
+    </div>
+  )
 }
 
 export default Row
