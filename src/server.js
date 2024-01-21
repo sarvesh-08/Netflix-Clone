@@ -1,4 +1,4 @@
-import axios from "axios"
+import axios from 'axios'
 
 const server  = axios.create({
     baseURL:"https://api.themoviedb.org/3",

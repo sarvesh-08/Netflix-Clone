@@ -1,11 +1,13 @@
 import './App.css';
+import react from 'react';
 import Row from './Row';
-
+import requests from './requests';
 function App() {
+
+  console.log("inside app")
   return (
     <div>
-      Hello from the other side 
-      <Row title="Fighter Club"/>
+      Hello
     </div>
     
   );
