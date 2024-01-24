@@ -3,15 +3,23 @@ import react from 'react';
 import Row from './Row';
 import requests from './requests';
 import server from './server';
+import Banner from './Banner'
 function App() {
 
   console.log("inside app")
   
   return (
     <div className='App'>
-      <h1>All Movies</h1>
-    <Row title="Netflix Originals" fetchURL={requests.fetchNetflixOriginals}/>
+      {/* Nav */}
+      <Banner/>
+    <Row title="Netflix Originals" fetchURL={requests.fetchNetflixOriginals} isLargeRow/>
     <Row title="Trending Now" fetchURL={requests.fetchTrending}/>
+    <Row title="Top Rated" fetchURL={requests.fetTopRated}/>
+    <Row title="Action Movies" fetchURL={requests.fetchActionMovies}/>
+    <Row title="Comedy Movies" fetchURL={requests.fetchComedyMovies}/>
+    <Row title="Horror Movies" fetchURL={requests.fetchHorrorMovies}/>
+    <Row title="Romance Movies" fetchURL={requests.fetchRomanceMovies}/>
+    <Row title="Documentries" fetchURL={requests.fetchDocumentaries}/>
      </div>
     
   );
