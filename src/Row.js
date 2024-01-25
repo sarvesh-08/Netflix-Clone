@@ -9,7 +9,7 @@ function Row ({title,fetchURL,isLargeRow}){
   useEffect(()=>{
       async function fetchData(){
          const request =await server.get(fetchURL);
-         console.log(request.data.results);
+         //console.log(request.data.results);
          setMovies(request.data.results);
          
       return request;
