@@ -4,12 +4,13 @@ import Row from './Row';
 import requests from './requests';
 import server from './server';
 import Banner from './Banner'
+
 function App() {
 
   console.log("inside app")
   
   return (
-    <div className='App'>
+    <div className='App' >
       {/* Nav */}
       <Banner/>
     <Row title="Netflix Originals" fetchURL={requests.fetchNetflixOriginals} isLargeRow/>
