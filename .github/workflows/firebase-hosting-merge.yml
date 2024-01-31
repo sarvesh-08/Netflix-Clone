@@ -17,11 +17,3 @@ jobs:
           firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_NETFILX_DUAL }}"
           channelId: live
           projectId: netfilx-dual
-stages:
-  - build
-
-build:
-  script:
-    - export CI=true
-    - npm install
-    - npm run build
