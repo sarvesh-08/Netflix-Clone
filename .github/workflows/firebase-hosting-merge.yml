@@ -2,22 +2,26 @@
 # https://github.com/firebase/firebase-tools
 
 name: Deploy to Firebase Hosting on merge
-'on':
+"on":
   push:
     branches:
       - Netflix-Clone
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
-    - name: Build
-      env:
-        CI: true
-      run: npm run build
     steps:
       - uses: actions/checkout@v4
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
-          repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_NETFILX_DUAL }}'
+          repoToken: "${{ secrets.GITHUB_TOKEN }}"
+          firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_NETFILX_DUAL }}"
           channelId: live
           projectId: netfilx-dual
+stages:
+  - build
+
+build:
+  script:
+    - export CI=true
+    - npm install
+    - npm run build
