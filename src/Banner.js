@@ -1,4 +1,4 @@
-import React, { useInsertionEffect } from "react";
+import React from "react";
 import server from "./server";
 import requests from "./requests";
 import { useState, useEffect } from "react";
@@ -19,7 +19,7 @@ function Banner() {
       return movie;
     }
     fetchData();
-  }, []);
+  },[]);
   console.log(movie);
   function truncate(str, n) {
     return str?.length > n ? str.substr(0, n - 1) + "..." : str;

@@ -33,7 +33,7 @@ function Row({ title, fetchURL, isLargeRow }) {
     if (trailerUrl) {
       setTrailerUrl("");
     } else {
-      movieTrailer(movie?.title || "")
+      movieTrailer(movie?.title ||movie?.name|| "")
         .then((url) => {
           //url = "https://www.youtube.com/watch?v=kPlSyYtE63M";
           console.log(movie);
