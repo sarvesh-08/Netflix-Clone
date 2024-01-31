@@ -1,34 +1,69 @@
-import React, { useState ,useEffect} from "react";
-import server from "./server"
+import React, { useState, useEffect } from "react";
+import server from "./server";
 import "./Row.css";
-const base_url="https://image.tmdb.org/t/p/original/";
+import YouTube from "react-youtube";
+import movieTrailer from "movie-trailer";
+const base_url = "https://image.tmdb.org/t/p/original/";
 
-function Row ({title,fetchURL,isLargeRow}){
-    
-  const [movies,setMovies]=useState([]);
-  useEffect(()=>{
-      async function fetchData(){
-         const request =await server.get(fetchURL);
-         //console.log(request.data.results);
-         setMovies(request.data.results);
-         
+function Row({ title, fetchURL, isLargeRow }) {
+  const [movies, setMovies] = useState([]);
+  const [trailerUrl, setTrailerUrl] = useState("");
+
+  useEffect(() => {
+    async function fetchData() {
+      const request = await server.get(fetchURL);
+      //console.log(request.data.results);
+      setMovies(request.data.results);
+
       return request;
-      
-      }
-      fetchData();
-     // console.log(request);
-  },[fetchURL]);
-   
-    return(
-        <div className="row">
-            <h2>{title}</h2>
-            <div className="row__posters ">
-               {movies.map(movie=>(
-               <img key={movie.id} className={`row__poster ${isLargeRow &&"row__posterLarge"}`} src={`${base_url}${isLargeRow?movie.poster_path:movie.backdrop_path}`}  alt={movie.name}/>
-              ))}
-           </div>
-        </div>
-    )
+    }
+    fetchData();
+    // console.log(request);
+  }, [fetchURL]);
+
+  const opts = {
+    height: "390",
+    width: "100%",
+    playerVars: {
+      autoplay: 1,
+    },
+  };
+
+  const handleClick = (movie) => {
+    if (trailerUrl) {
+      setTrailerUrl("");
+    } else {
+      movieTrailer(movie?.title || "")
+        .then((url) => {
+          //url = "https://www.youtube.com/watch?v=kPlSyYtE63M";
+          console.log(movie);
+          const urlParams = new URLSearchParams(new URL(url).search);
+          console.log(urlParams);
+          setTrailerUrl(urlParams.get("v"));
+        })
+        .catch((error) => console.log(error));
+    }
+  };
+
+  return (
+    <div className="row">
+      <h2>{title}</h2>
+      <div className="row__posters ">
+        {movies.map((movie) => (
+          <img
+            key={movie.id}
+            onClick={() => handleClick(movie)}
+            className={`row__poster ${isLargeRow && "row__posterLarge"}`}
+            src={`${base_url}${
+              isLargeRow ? movie.poster_path : movie.backdrop_path
+            }`}
+            alt={movie.name}
+          />
+        ))}
+      </div>
+      {trailerUrl && <YouTube videoId={trailerUrl} opts={opts} />}
+    </div>
+  );
 }
 
-export default Row
+export default Row;
